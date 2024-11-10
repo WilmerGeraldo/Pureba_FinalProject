@@ -13,20 +13,6 @@
         <h5 class="card-header">@Accion producto</h5>
         <div class="card-body">
             <div class="mb-3">
-                <label class="form-label">Imagen</label>
-                <div class="image-upload-container">
-                    <InputFile OnChange="OnInputFileChange" class="image-input-overlay" />
-                    @if (imagePreview != null)
-                    {
-                        <img src="@imagePreview" alt="Imagen seleccionada" class="img-thumbnail preview-image" />
-                    }
-                    else
-                    {
-                        <span class="placeholder-text">Seleccionar imagen</span>
-                    }
-                </div>
-            </div>
-            <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombre" placeholder="Nombre">
             </div>
@@ -132,19 +118,5 @@ else
     public void btnCancelarClick()
     {
         ShowForm = false;
-    }
-
-    private string? imagePreview;
-
-    private async Task OnInputFileChange(InputFileChangeEventArgs e)
-    {
-        var file = e.File;
-        if (file != null)
-        {
-            using var stream = file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 5);
-            var buffer = new byte[file.Size];
-            await stream.ReadAsync(buffer);
-            imagePreview = $"data:{file.ContentType};base64,{Convert.ToBase64String(buffer)}";
-        }
     }
 }
