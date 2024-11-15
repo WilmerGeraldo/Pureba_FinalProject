@@ -8,20 +8,20 @@ namespace Pureba_FinalProject.Data.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string Nombre { get; set; } = null!;
+        public string NombreC { get; set; } = null!;
 
 
-        public static Categoria Create(string nombre)
+        public static Categoria Create(string nombreC)
             => new()
             {
-                Nombre = nombre
+                NombreC = nombreC
             };
-        public bool Update(string nombre)
+        public bool Update(string nombreC)
         {
             var save = false;
-            if (Nombre != nombre)
+            if (NombreC != nombreC)
             {
-                Nombre = nombre; save = true;
+                NombreC = nombreC; save = true;
             }
             return save;
         }
