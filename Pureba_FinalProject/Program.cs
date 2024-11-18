@@ -1,4 +1,5 @@
 using Pureba_FinalProject.Components;
+using Pureba_FinalProject.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddDbContext<IdbContext,dbContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

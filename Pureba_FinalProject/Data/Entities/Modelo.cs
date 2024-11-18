@@ -9,6 +9,7 @@ namespace Pureba_FinalProject.Data.Entities
         [Key]
         public int Id { get; set; }
         public string NombreM { get; set; } = null!;
+        public int MarcaId {  get; set; }
 
         public static Modelo Create(string nombreM)
             => new()
@@ -24,7 +25,7 @@ namespace Pureba_FinalProject.Data.Entities
             }
             return save;
         }
-        [ForeignKey(nameof(Marca))]
-        public virtual Marca? Marcas { get; set; }
+        [ForeignKey(nameof(MarcaId))]
+        public virtual Marca? Marca { get; set; }
     }
 }

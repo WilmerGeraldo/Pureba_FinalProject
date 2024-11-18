@@ -1,8 +1,7 @@
-﻿using Pureba_FinalProject.Components.Pages.Admin.Marcas;
-using Pureba_FinalProject.Components.Pages.Admin.Modelos;
+﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Pureba_FinalProject.Data.Entities;
 [Table("Productos")]
@@ -12,40 +11,40 @@ public class Producto
     [Key]
     public int Id { get; set; }
     public string Nombre { get; set; } = null!;
-    public string Marca { get; set; }
-    public Date FechaL { get; set; }
-    public string Color { get; set; }
+    public int CategoriaId { get; set; }
+    public DateTime FechaL { get; set; }
+    public string? Color { get; set; }
     public int Cantidad { get; set; }
-    public int? ModeloId { get; set; }
+    public int ModeloId { get; set; }
     public decimal Precio { get; set; } = 0;
     public string? Descripcion { get; set; }
-    public string IMG { get; set; }
+    public string? Imagen { get; set; }
 
     #region Metodos
-    public static Producto Create(string nombre, string marca, Date fechaL,string color,int cantidad, int? modeloId = null, decimal precio = 0, string? descripcion = null, string img)
+    public static Producto Create(string nombre, int categoriaId, DateTime fechaL,string color,int cantidad,string imagen, int modeloId , decimal precio = 0, string? descripcion = null)
         => new()
         {
             Nombre = nombre,
-            Marca = marca,
+            CategoriaId = categoriaId,
             FechaL = fechaL,
             Color = color,
             Cantidad = cantidad,
             ModeloId = modeloId,
             Precio = precio,
             Descripcion = descripcion,
-            IMG = img
+            Imagen = imagen
         };
 
-    public bool Update(string nombre, string marca, Date fechaL, string color, int cantidad, int? modeloId = null, decimal precio = 0, string? descripcion = null, string img)
+    public bool Update(string nombre, int categoriaId, DateTime fechaL, string color, int cantidad,string imagen, int modeloId, decimal precio = 0, string? descripcion = null)
     {
         var save = false;
         if (Nombre != nombre)
         {
             Nombre = nombre; save = true;
         }
-        if (Marca != marca)
+        if (CategoriaId != categoriaId)
         {
-            Marca = marca; save = true;
+            CategoriaId = categoriaId; save = true;
         }
         if (FechaL != fechaL)
         {
@@ -58,6 +57,10 @@ public class Producto
         if(Cantidad != cantidad)
         {
             Cantidad = cantidad; save = true;
+        }
+        if (Imagen != imagen)
+        {
+            Imagen = imagen; save = true;
         }
         if (ModeloId != modeloId)
         {
@@ -77,10 +80,10 @@ public class Producto
 
     #region Relaciones
     [ForeignKey(nameof(ModeloId))]
-    public virtual Modelo? Modelos { get; set; }
+    public virtual Modelo? Modelo { get; set; }
 
-    [ForeignKey(nameof(Marca))]
-    public virtual Marca? Marcas { get; set; }
+    [ForeignKey(nameof(CategoriaId))]
+    public virtual Categoria? Categoria { get; set; }
 
     #endregion
 }

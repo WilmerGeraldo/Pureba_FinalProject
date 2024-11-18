@@ -10,7 +10,6 @@ namespace Pureba_FinalProject.Data.Entities
         public int Id { get; set; }
         public string NombreC { get; set; } = null!;
 
-
         public static Categoria Create(string nombreC)
             => new()
             {
